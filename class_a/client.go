@@ -30,7 +30,7 @@ func (c *Client) GetTokenBalances(chainID, address string, params BalanceParams)
 // for given chain_id and wallet address.
 func (c *Client) GetHistoricalPortfolio(chainID, address string) (Portfolio, error) {
 	u := fmt.Sprintf("%v/address/%v/portfolio_v2/", chainID, address)
-	balance := Balance{}
-	err := c.API.Request("GET", u, nil, &balance)
-	return balance.Data, err
+	portfolio := Portfolio{}
+	err := c.API.Request("GET", u, nil, &portfolio)
+	return portfolio, err
 }
