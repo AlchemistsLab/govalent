@@ -72,10 +72,24 @@ fmt.Printf("%v", p)
 ```go
 import (
     "github.com/zaebee/govalent"
-    "github.com/zaebee/govalent/class_a"
 )
 
 p, err := govalent.ClassA().GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+if err != nil {
+	fmt.Printf("err = %v", err)
+	return
+}
+fmt.Printf("%v", p)
+```
+
+#### Get Transactions
+
+```go
+import (
+    "github.com/zaebee/govalent"
+)
+
+p, err := govalent.ClassA().GetTransactions("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -88,8 +102,18 @@ fmt.Printf("%v", p)
 ```go
 import (
     "github.com/zaebee/govalent"
+    "github.com/zaebee/govalent/class_a"
 )
-// TODO
+
+params := class_a.TransferParams{
+    ContractAddress: "0x8a0C542bA7bBBab7cF3551fFcc546CdC5362d2a1",
+}
+p, err := govalent.ClassA().GetERCTokenTransfers("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", params)
+if err != nil {
+fmt.Printf("err = %v", err)
+return
+}
+fmt.Printf("%v", p)
 ```
 
 ### Class B endpoints
