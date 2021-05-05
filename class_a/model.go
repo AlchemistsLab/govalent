@@ -61,22 +61,24 @@ type Holding struct {
 }
 
 type NftData struct {
-	TokenID           string      `json:"token_id"`
-	TokenBalance      string      `json:"token_balance"`
-	TokenUrl          string      `json:"token_url"`
-	SupportsErc       []string    `json:"supports_erc"`
-	TokenPriceWei     interface{} `json:"token_price_wei"`
-	TokenQuoteRateEth interface{} `json:"token_quote_rate_eth"`
-	ExternalData      *struct {
-		Name        string `json:"name"`
-		Description string `json:"description"`
-		Image       string `json:"image"`
-		ExternalUrl string `json:"external_url"`
-		Attributes  []struct {
-			TraitType string      `json:"trait_type"`
-			Value     interface{} `json:"value"`
-		} `json:"attributes"`
-		Owner string `json:"owner"`
-	} `json:"external_data"`
+	TokenID           string       `json:"token_id"`
+	TokenBalance      string       `json:"token_balance"`
+	TokenUrl          string       `json:"token_url"`
+	SupportsErc       []string     `json:"supports_erc"`
+	TokenPriceWei     interface{}  `json:"token_price_wei"`
+	TokenQuoteRateEth interface{}  `json:"token_quote_rate_eth"`
+	Owner             string       `json:"owner"`
+	ExternalData      ExternalData `json:"external_data"`
+}
+
+type ExternalData struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
+	ExternalUrl string `json:"external_url"`
+	Attributes  []struct {
+		TraitType string      `json:"trait_type"`
+		Value     interface{} `json:"value"`
+	} `json:"attributes"`
 	Owner string `json:"owner"`
 }
