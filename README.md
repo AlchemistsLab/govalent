@@ -110,8 +110,8 @@ params := class_a.TransferParams{
 }
 p, err := govalent.ClassA().GetERCTokenTransfers("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", params)
 if err != nil {
-fmt.Printf("err = %v", err)
-return
+    fmt.Printf("err = %v", err)
+    return
 }
 fmt.Printf("%v", p)
 ```
