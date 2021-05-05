@@ -2,8 +2,8 @@
 package govalent
 
 import (
-	"govalent/class_a"
-	"govalent/client"
+	"github.com/zaebee/govalent/class_a"
+	"github.com/zaebee/govalent/client"
 	"net/http"
 	"time"
 )
