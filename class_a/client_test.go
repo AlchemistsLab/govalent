@@ -2,7 +2,7 @@ package class_a
 
 import (
 	"github.com/google/go-cmp/cmp"
-	"github.com/zaebee/govalent/client"
+	"govalent/client"
 	"io"
 	"net/http"
 	"net/http/httptest"

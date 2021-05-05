@@ -3,7 +3,7 @@ package class_a
 
 import (
 	"fmt"
-	"github.com/zaebee/govalent/client"
+	"govalent/client"
 )
 
 type Client struct {
