@@ -20,7 +20,7 @@ var _ ClassAInterface = (*Client)(nil)
 
 // GetTokenBalances returns a list of all ERC20 and NFT token balances along with their current spot prices.
 func (c *Client) GetTokenBalances(chainID, address string, params BalanceParams) (Portfolio, error) {
-	u := fmt.Sprintf("/v1/%v/address/%v/balances_v2/", chainID, address)
+	u := fmt.Sprintf("%v/address/%v/balances_v2/", chainID, address)
 	balance := Balance{}
 	err := c.API.Request("GET", u, params, &balance)
 	return balance.Data, err
@@ -29,7 +29,7 @@ func (c *Client) GetTokenBalances(chainID, address string, params BalanceParams)
 // GetHistoricalPortfolio returns wallet value for the last 30 days at 24 hour timestamps
 // for given chain_id and wallet address.
 func (c *Client) GetHistoricalPortfolio(chainID, address string) (Portfolio, error) {
-	u := fmt.Sprintf("/v1/%v/address/%v/portfolio_v2/", chainID, address)
+	u := fmt.Sprintf("%v/address/%v/portfolio_v2/", chainID, address)
 	balance := Balance{}
 	err := c.API.Request("GET", u, nil, &balance)
 	return balance.Data, err
