@@ -36,6 +36,28 @@ type Item struct {
 	QuoteRate            float64   `json:"quote_rate"`
 	Quote                float64   `json:"quote"`
 	NftData              []NftData `json:"nft_data"`
+	Holdings             []Holding `json:"holdings"`
+}
+
+type Holding struct {
+	Timestamp time.Time `json:"timestamp"`
+	QuoteRate float64   `json:"quote_rate"`
+	Open      struct {
+		Balance string  `json:"balance"`
+		Quote   float64 `json:"quote"`
+	} `json:"open"`
+	High struct {
+		Balance string  `json:"balance"`
+		Quote   float64 `json:"quote"`
+	} `json:"high"`
+	Low struct {
+		Balance string  `json:"balance"`
+		Quote   float64 `json:"quote"`
+	} `json:"low"`
+	Close struct {
+		Balance string  `json:"balance"`
+		Quote   float64 `json:"quote"`
+	} `json:"close"`
 }
 
 type NftData struct {

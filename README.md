@@ -19,7 +19,7 @@ import (
 
 // Setup
 govalent.APIKey = ""
-info, err := govalent.Portfolio(56, '0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B')
+info, err := govalent.ClassA().GetHistoricalPortfolio(56, '0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B')
 if err != nil {
 	log.Printf("err = %v", err)
 	return
@@ -29,7 +29,7 @@ log.Printf("%v", info)
 
 ### Usage with a Client
 
-If you are dealing with multiple accounts. You can create a new `binance.Client` by the following
+If you are dealing with multiple accounts. You can create a new `govalent.Client` by the following
 
 ```go
 import (
@@ -37,7 +37,7 @@ import (
 )
 covalentClient := govalent.Client{}
 covalentClient.Init("YOUR_API_KEY")
-info, err := covalentClient.Portfolio(56, "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+info, err := covalentClient.GetHistoricalPortfolio(56, "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	log.Printf("err = %v", err)
 	return
