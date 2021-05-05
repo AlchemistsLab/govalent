@@ -19,12 +19,12 @@ import (
 
 // Setup
 govalent.APIKey = ""
-info, err := govalent.ClassA().GetHistoricalPortfolio(56, '0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B')
+info, err := govalent.ClassA().GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
-	log.Printf("err = %v", err)
+	fmt.Printf("err = %v", err)
 	return
 }
-log.Printf("%v", info)
+fmt.Printf("%v", info)
 ```
 
 ### Usage with a Client
@@ -33,16 +33,16 @@ If you are dealing with multiple accounts. You can create a new `govalent.Client
 
 ```go
 import (
-"github.com/zaebee/govalent"
+    "github.com/zaebee/govalent"
 )
 covalentClient := govalent.Client{}
 covalentClient.Init("YOUR_API_KEY")
-info, err := covalentClient.GetHistoricalPortfolio(56, "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+info, err := covalentClient.GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
-	log.Printf("err = %v", err)
+	fmt.Printf("err = %v", err)
 	return
 }
-log.Printf("%v", info)
+fmt.Printf("%v", info)
 ```
 
 ### Class A endpoints
@@ -59,39 +59,35 @@ balanceParams := class_a.BalanceParams{
 	Nft: true,
 }
 
-p, err := govalent.ClassA().GetTokenBalances(56, "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", balanceParams)
+p, err := govalent.ClassA().GetTokenBalances("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", balanceParams)
 if err != nil {
-	log.Printf("err = %v", err)
+	fmt.Printf("err = %v", err)
 	return
 }
-log.Printf("%v", p)
+fmt.Printf("%v", p)
 ```
 
 #### Get Historical Portfolio
 
 ```go
 import (
-"github.com/zaebee/govalent"
-"github.com/zaebee/govalent/class_a"
+    "github.com/zaebee/govalent"
+    "github.com/zaebee/govalent/class_a"
 )
 
-portfolioParams := class_a.PortfolioParams{
-Nft: true,
-}
-
-p, err := govalent.ClassA().GetHistoricalPortfolio(56, "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", portfolioParams)
+p, err := govalent.ClassA().GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
-	log.Printf("err = %v", err)
+	fmt.Printf("err = %v", err)
 	return
 }
-log.Printf("%v", p)
+fmt.Printf("%v", p)
 ```
 
 #### Get ERC20 token transfers
 
 ```go
 import (
-"github.com/zaebee/govalent"
+    "github.com/zaebee/govalent"
 )
 // TODO
 ```
