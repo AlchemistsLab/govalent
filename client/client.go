@@ -4,6 +4,7 @@ package client
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -19,8 +20,8 @@ type API struct {
 
 // CovalentError handles api errors from covalenthq.com.
 type CovalentError struct {
-	Code int    `json:"code"`
-	Msg  string `json:"msg"`
+	Code int    `json:"error_code"`
+	Msg  string `json:"error_message"`
 }
 
 // Error returns error message from Covalent API.
@@ -67,7 +68,12 @@ func (a *API) Request(method, endpoint string, params interface{}, out interface
 		if err != nil {
 			return err
 		}
-		defer res.Body.Close()
+		defer func(Body io.ReadCloser) {
+			err := Body.Close()
+			if err != nil {
+				log.Printf("error while close response: %v", err)
+			}
+		}(res.Body)
 		if res.StatusCode != 200 {
 			e := CovalentError{}
 			if err := json.NewDecoder(res.Body).Decode(&e); err != nil {

@@ -82,7 +82,7 @@ func TestAPI_Request_WhenInvalid(t *testing.T) {
 		},
 		{
 			desc:     "WhenStatusNotFound",
-			response: `{"code": 404, "msg": "url not found"}`,
+			response: `{"error_code": 404, "error_message": "url not found"}`,
 			status:   http.StatusNotFound,
 			want: CovalentError{
 				Code: 404,
