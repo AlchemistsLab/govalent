@@ -1,4 +1,4 @@
-module govalent
+module github.com/zaebee/govalent
 
 go 1.16
 
