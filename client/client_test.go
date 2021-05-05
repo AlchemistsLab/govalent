@@ -65,7 +65,7 @@ func TestAPI_Request_WhenInvalid(t *testing.T) {
 	}{
 		{
 			desc:     "WhenStatusForbidden",
-			response: `{"code": 401, "msg": "forbidden"}`,
+			response: `{"error_code": 401, "error_message": "forbidden"}`,
 			status:   http.StatusForbidden,
 			want: CovalentError{
 				Code: 401,
