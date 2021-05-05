@@ -42,7 +42,7 @@ func TestAPI_Request_WhenValid(t *testing.T) {
 			}))
 			defer s.Close()
 			client := s.Client()
-			api := New(s.URL, "key", client, "userAgent")
+			api := New(s.URL, "ckey_test", client)
 
 			got := &out{}
 			err := api.Request("GET", "/v1/", nil, got)
@@ -103,7 +103,7 @@ func TestAPI_Request_WhenInvalid(t *testing.T) {
 			}))
 			defer s.Close()
 			client := s.Client()
-			api := New(s.URL, "key", client, "userAgent")
+			api := New(s.URL, "ckey_test", client)
 
 			err := api.Request("GET", "/v1/", nil, &out{})
 
