@@ -5,7 +5,7 @@ govalent is a go client library for Covalent Rest APIs
 ## Installation
 
 ```sh
-go get github.com/zaebee/govalent
+go get github.com/AlchemistsLab/govalent
 ```
 
 ### Usage without a Client
@@ -14,7 +14,7 @@ If you are dealing with one account. There is no need to create a new client. yo
 
 ```go
 import (
-	"github.com/zaebee/govalent"
+	"github.com/AlchemistsLab/govalent"
 )
 
 // Setup
@@ -33,7 +33,7 @@ If you are dealing with multiple accounts. You can create a new `govalent.Client
 
 ```go
 import (
-    "github.com/zaebee/govalent"
+    "github.com/AlchemistsLab/govalent"
 )
 covalentClient := govalent.Client{}
 covalentClient.Init("YOUR_API_KEY")
@@ -51,8 +51,8 @@ fmt.Printf("%v", info)
 
 ```go
 import (
-	"github.com/zaebee/govalent"
-	"github.com/zaebee/govalent/class_a"
+	"github.com/AlchemistsLab/govalent"
+	"github.com/AlchemistsLab/govalent/class_a"
 )
 
 balanceParams := class_a.BalanceParams{
@@ -71,7 +71,7 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "github.com/zaebee/govalent"
+    "github.com/AlchemistsLab/govalent"
 )
 
 p, err := govalent.ClassA().GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
@@ -86,7 +86,7 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "github.com/zaebee/govalent"
+    "github.com/AlchemistsLab/govalent"
 )
 
 p, err := govalent.ClassA().GetTransactions("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
@@ -101,8 +101,8 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "github.com/zaebee/govalent"
-    "github.com/zaebee/govalent/class_a"
+    "github.com/AlchemistsLab/govalent"
+    "github.com/AlchemistsLab/govalent/class_a"
 )
 
 params := class_a.TransferParams{
