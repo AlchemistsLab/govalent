@@ -14,6 +14,7 @@ If you are dealing with one account. There is no need to create a new client. yo
 
 ```go
 import (
+	"fmt"
 	"github.com/AlchemistsLab/govalent"
 )
 
@@ -33,6 +34,7 @@ If you are dealing with multiple accounts. You can create a new `govalent.Client
 
 ```go
 import (
+    "fmt"
     "github.com/AlchemistsLab/govalent"
 )
 covalentClient := govalent.Client{}
@@ -51,7 +53,8 @@ fmt.Printf("%v", info)
 
 ```go
 import (
-	"github.com/AlchemistsLab/govalent"
+    "fmt"
+    "github.com/AlchemistsLab/govalent"
 	"github.com/AlchemistsLab/govalent/class_a"
 )
 
@@ -71,6 +74,7 @@ fmt.Printf("%v", p)
 
 ```go
 import (
+    "fmt"
     "github.com/AlchemistsLab/govalent"
 )
 
@@ -86,6 +90,7 @@ fmt.Printf("%v", p)
 
 ```go
 import (
+    "fmt"
     "github.com/AlchemistsLab/govalent"
 )
 
@@ -101,6 +106,7 @@ fmt.Printf("%v", p)
 
 ```go
 import (
+    "fmt"
     "github.com/AlchemistsLab/govalent"
     "github.com/AlchemistsLab/govalent/class_a"
 )

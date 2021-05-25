@@ -1,8 +1,8 @@
 package class_a
 
 import (
+	"github.com/AlchemistsLab/govalent/client"
 	"github.com/google/go-cmp/cmp"
-	"github.com/zaebee/govalent/client"
 	"io"
 	"net/http"
 	"net/http/httptest"
