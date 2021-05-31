@@ -20,7 +20,9 @@ type ClassAInterface interface {
 	HistoricalPortfolio(chainID, address string) (Portfolios, error)
 
 	Transactions(chainID, address string) (Transactions, error)
+	Transaction(chainID, txHash string) (Transactions, error)
 	ERCTokenTransfers(chainID, address string, params TransferParams) (Transactions, error)
+
 	Block(chainID, blockHeight string) (Blocks, error)
 	LogEventsByContract(chainID, address string, params LogEventsParams) (LogEvents, error)
 	LogEventsByTopic(chainID, topic string, params LogEventsParams) (LogEvents, error)
@@ -75,9 +77,18 @@ func (c *Client) HistoricalPortfolio(chainID, address string) (Portfolios, error
 }
 
 // Transactions retrieves all transactions for address including their decoded log events.
-//This endpoint does a deep-crawl of the blockchain to retrieve all kinds of transactions that references the address.
+// This endpoint does a deep-crawl of the blockchain to retrieve all kinds of transactions
+// that references the address.
 func (c *Client) Transactions(chainID, address string) (Transactions, error) {
 	u := fmt.Sprintf("%v/address/%v/transactions_v2/", chainID, address)
+	response := TransactionResponse{}
+	err := c.API.Request("GET", u, nil, &response)
+	return response.Data, err
+}
+
+// Transaction retrieves a single transaction for tx_hash including their decoded log events.
+func (c *Client) Transaction(chainID, txHash string) (Transactions, error) {
+	u := fmt.Sprintf("%v/transaction_v2/%v/", chainID, txHash)
 	response := TransactionResponse{}
 	err := c.API.Request("GET", u, nil, &response)
 	return response.Data, err
@@ -108,7 +119,8 @@ func (c *Client) LogEventsByContract(chainID, address string, params LogEventsPa
 	return response.Data, err
 }
 
-// LogEventsByTopic returns a paginated list of decoded log events with one or more topic hashes separated by a comma.
+// LogEventsByTopic returns a paginated list of decoded log events with one or more topic hashes
+// separated by a comma.
 func (c *Client) LogEventsByTopic(chainID, topic string, params LogEventsParams) (LogEvents, error) {
 	u := fmt.Sprintf("%v/events/topics/%v/", chainID, topic)
 	response := LogEventsResponse{}

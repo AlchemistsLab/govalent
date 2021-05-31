@@ -124,7 +124,7 @@ type Contracts struct {
 		ContractAddress        string   `json:"contract_address"`
 		SupportsErc            []string `json:"supports_erc"`
 		LogoUrl                string   `json:"logo_url"`
-		EthereumMainnetAddress string   `json:"ethereum_mainnet_address"`
+		EthereumMainNetAddress string   `json:"ethereum_mainnet_address"`
 	} `json:"items"`
 	Pagination Pagination `json:"pagination"`
 }
