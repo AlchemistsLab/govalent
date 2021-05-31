@@ -37,9 +37,9 @@ import (
     "fmt"
     "github.com/AlchemistsLab/govalent"
 )
-covalentClient := govalent.Client{}
-covalentClient.Init("YOUR_API_KEY")
-info, err := covalentClient.ClassA.GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+client := govalent.Client{}
+client.Init("YOUR_API_KEY")
+info, err := client.ClassA.GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -55,7 +55,7 @@ fmt.Printf("%v", info)
 import (
     "fmt"
     "github.com/AlchemistsLab/govalent"
-	"github.com/AlchemistsLab/govalent/class_a"
+    "github.com/AlchemistsLab/govalent/class_a"
 )
 
 balanceParams := class_a.BalanceParams{
