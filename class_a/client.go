@@ -1,4 +1,4 @@
-//Package class_a general provides the binding for Covalent Rest APIs Class A endpoints
+//Package class_a general provides the binding for Covalent Rest APIs Class A endpoints.
 package class_a
 
 import (

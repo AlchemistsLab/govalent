@@ -176,4 +176,30 @@ fmt.Printf("%v", p)
 
 ### Class B endpoints
 
-TODO
+#### Get Sushiswap address exchange liquidity transactions
+
+```go
+import (
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
+	"github.com/AlchemistsLab/govalent/class_b"
+)
+
+func main() {
+	govalent.APIKey = "ckey_95c202a743e24270bc7f1706c4c"
+	params := class_b.SushiSwapActsParams{
+		Swaps: true,
+	}
+	acts, err := govalent.ClassB().SushiSwapActs("137", "0x4121dD930B15742b6d2e89B41284A79320bb8503", params)
+	if err != nil {
+		fmt.Printf("err = %v", err)
+		return
+	}
+	fmt.Printf("Get sushiswap act for address: %v, at:%v\n", acts.Address, acts.UpdatedAt)
+	for _, a := range acts.Items {
+		fmt.Printf("Act[%v]: %v. At:%v\n", a.Act, a.Description, a.ActAt)
+	}
+}
+```
+
+#### TODO

@@ -3,6 +3,7 @@ package govalent
 
 import (
 	"github.com/AlchemistsLab/govalent/class_a"
+	"github.com/AlchemistsLab/govalent/class_b"
 	"github.com/AlchemistsLab/govalent/client"
 	"net/http"
 	"time"
@@ -26,13 +27,21 @@ func ClassA() *class_a.Client {
 	return &class_a.Client{API: *api}
 }
 
+// ClassB uses endpoint without client.
+func ClassB() *class_b.Client {
+	api := client.New(APIURL, APIKey, httpClient)
+	return &class_b.Client{API: *api}
+}
+
 //Client is the Covalent client. It contains all resources available.
 type Client struct {
 	ClassA class_a.Client
+	ClassB class_b.Client
 }
 
-//Init initializes the Binance client with given API key, secret key.
+//Init initializes the covalent client with given API key, secret key.
 func (c *Client) Init(apiKey string) {
 	api := client.New(APIURL, apiKey, httpClient)
 	c.ClassA = class_a.Client{API: *api}
+	c.ClassB = class_b.Client{API: *api}
 }
