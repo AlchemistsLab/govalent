@@ -56,16 +56,7 @@ type BlockResponse struct {
 
 // LogEventsResponse returns decoded log events.
 type LogEventsResponse struct {
-	UpdatedAt    time.Time `json:"updated_at"`
 	Data         LogEvents `json:"data"`
-	Error        bool      `json:"error"`
-	ErrorMessage string    `json:"error_message"`
-	ErrorCode    int       `json:"error_code"`
-}
-
-// NFTExternalMetadataResponse returns NFT external metadata for nft external metadata endpoint.
-type NFTExternalMetadataResponse struct {
-	Data         NFTTokens `json:"data"`
 	Error        bool      `json:"error"`
 	ErrorMessage string    `json:"error_message"`
 	ErrorCode    int       `json:"error_code"`
@@ -73,7 +64,6 @@ type NFTExternalMetadataResponse struct {
 
 // NFTTokenResponse returns NFT tokens data for given contract address.
 type NFTTokenResponse struct {
-	UpdatedAt    time.Time `json:"updated_at"`
 	Data         NFTTokens `json:"data"`
 	Error        bool      `json:"error"`
 	ErrorMessage string    `json:"error_message"`
@@ -121,6 +111,7 @@ type LogEvents struct {
 
 // NFTTokens returns list of token items.
 type NFTTokens struct {
+	UpdatedAt  time.Time   `json:"updated_at"`
 	Items      []Portfolio `json:"items"`
 	Pagination Pagination  `json:"pagination"`
 }

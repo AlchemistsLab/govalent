@@ -87,7 +87,7 @@ func (c *Client) GetLogEventsByTopic(chainID, topic string, params LogEventsPara
 // GetExternalNFTMetadata returns the external metadata for given a NFT contract address and a token ID.
 func (c *Client) GetExternalNFTMetadata(chainID, address, tokenID string) (NFTTokens, error) {
 	u := fmt.Sprintf("%v/tokens/%v/nft_metadata/%v/", chainID, address, tokenID)
-	response := NFTExternalMetadataResponse{}
+	response := NFTTokenResponse{}
 	err := c.API.Request("GET", u, nil, &response)
 	return response.Data, err
 }
