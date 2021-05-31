@@ -17,6 +17,7 @@ type ClassAInterface interface {
 	GetTransactions(chainID, address string) (TransactionData, error)
 	GetERCTokenTransfers(chainID, address string, params TransferParams) (TransactionData, error)
 	GetBlock(chainID, blockHeight string) (BlockData, error)
+	GetLogEventsByContract(chainID, address string, params LogEventsParams) (LogEventsData, error)
 }
 
 var _ ClassAInterface = (*Client)(nil)
@@ -62,4 +63,12 @@ func (c *Client) GetBlock(chainID, blockHeight string) (BlockData, error) {
 	block := Block{}
 	err := c.API.Request("GET", u, nil, &block)
 	return block.Data, err
+}
+
+// GetLogEventsByContract returns a paginated list of decoded log events emitted by a particular smart contract.
+func (c *Client) GetLogEventsByContract(chainID, address string, params LogEventsParams) (LogEventsData, error) {
+	u := fmt.Sprintf("%v/events/address/%v/", chainID, address)
+	logEvents := LogEvents{}
+	err := c.API.Request("GET", u, params, &logEvents)
+	return logEvents.Data, err
 }

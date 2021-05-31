@@ -15,6 +15,13 @@ type TransferParams struct {
 	// PageSize        int    `json:"page-size"`
 }
 
+// LogEventsParams sets parameters for get log events endpoint.
+type LogEventsParams struct {
+	StartingBlock string `json:"starting-block"`
+	EndingBlock   string `json:"ending-block"`
+	PageNumber    int    `json:"page-number"`
+}
+
 // Pagination returns pagination data for each endpoint.
 type Pagination struct {
 	HasMore    bool        `json:"has_more"`
@@ -27,7 +34,7 @@ type Pagination struct {
 type Balance struct {
 	Data         PortfolioData `json:"data"`
 	Error        bool          `json:"error"`
-	ErrorMessage interface{}   `json:"error_message"`
+	ErrorMessage string        `json:"error_message"`
 	ErrorCode    interface{}   `json:"error_code"`
 }
 
@@ -104,7 +111,7 @@ type ExternalData struct {
 type Transaction struct {
 	Data         TransactionData `json:"data"`
 	Error        bool            `json:"error"`
-	ErrorMessage interface{}     `json:"error_message"`
+	ErrorMessage string          `json:"error_message"`
 	ErrorCode    interface{}     `json:"error_code"`
 }
 
@@ -134,35 +141,13 @@ type TransactionItem struct {
 	GasPrice         int64       `json:"gas_price"`
 	GasQuote         float64     `json:"gas_quote"`
 	GasQuoteRate     float64     `json:"gas_quote_rate"`
-	LogEvents        []struct {
-		BlockSignedAt      time.Time   `json:"block_signed_at"`
-		BlockHeight        int         `json:"block_height"`
-		TxOffset           int         `json:"tx_offset"`
-		LogOffset          int         `json:"log_offset"`
-		TxHash             string      `json:"tx_hash"`
-		RawLogTopicsBytes  interface{} `json:"_raw_log_topics_bytes"`
-		RawLogTopics       []string    `json:"raw_log_topics"`
-		SenderAddress      string      `json:"sender_address"`
-		SenderAddressLabel interface{} `json:"sender_address_label"`
-		RawLogData         string      `json:"raw_log_data"`
-		Decoded            struct {
-			Name      string `json:"name"`
-			Signature string `json:"signature"`
-			Params    []struct {
-				Name    string      `json:"name"`
-				Type    string      `json:"type"`
-				Indexed bool        `json:"indexed"`
-				Decoded bool        `json:"decoded"`
-				Value   interface{} `json:"value"`
-			} `json:"params"`
-		} `json:"decoded"`
-	} `json:"log_events"`
+	LogEvents        []LogEvent  `json:"log_events"`
 }
 
 type Block struct {
 	Data         BlockData   `json:"data"`
 	Error        bool        `json:"error"`
-	ErrorMessage interface{} `json:"error_message"`
+	ErrorMessage string      `json:"error_message"`
 	ErrorCode    interface{} `json:"error_code"`
 }
 
@@ -173,4 +158,46 @@ type BlockData struct {
 		Height   int       `json:"height"`
 	} `json:"items"`
 	Pagination Pagination `json:"pagination"`
+}
+
+type LogEvents struct {
+	UpdatedAt    time.Time `json:"updated_at"`
+	Data         LogEventsData
+	Error        bool        `json:"error"`
+	ErrorMessage string      `json:"error_message"`
+	ErrorCode    interface{} `json:"error_code"`
+}
+
+type LogEventsData struct {
+	UpdatedAt  time.Time  `json:"updated_at"`
+	Items      []LogEvent `json:"items"`
+	Pagination Pagination `json:"pagination"`
+}
+
+type LogEvent struct {
+	BlockSignedAt              time.Time   `json:"block_signed_at"`
+	BlockHeight                int         `json:"block_height"`
+	TxOffset                   int         `json:"tx_offset"`
+	LogOffset                  int         `json:"log_offset"`
+	TxHash                     string      `json:"tx_hash"`
+	RawLogTopicsBytes          interface{} `json:"_raw_log_topics_bytes"`
+	RawLogTopics               []string    `json:"raw_log_topics"`
+	SenderContractDecimals     interface{} `json:"sender_contract_decimals"`
+	SenderName                 interface{} `json:"sender_name"`
+	SenderContractTickerSymbol interface{} `json:"sender_contract_ticker_symbol"`
+	SenderAddress              string      `json:"sender_address"`
+	SenderAddressLabel         interface{} `json:"sender_address_label"`
+	SenderLogoUrl              interface{} `json:"sender_logo_url"`
+	RawLogData                 string      `json:"raw_log_data"`
+	Decoded                    struct {
+		Name      string `json:"name"`
+		Signature string `json:"signature"`
+		Params    []struct {
+			Name    string      `json:"name"`
+			Type    string      `json:"type"`
+			Indexed bool        `json:"indexed"`
+			Decoded bool        `json:"decoded"`
+			Value   interface{} `json:"value"`
+		} `json:"params"`
+	} `json:"decoded"`
 }

@@ -122,6 +122,27 @@ if err != nil {
 fmt.Printf("%v", p)
 ```
 
+#### Get Log Events by contract address.
+
+```go
+import (
+    "fmt"
+    "github.com/AlchemistsLab/govalent"
+    "github.com/AlchemistsLab/govalent/class_a"
+)
+
+params := class_a.LogEventsParams{
+    StartingBlock: "9601459",
+    EndingBlock: "9999800",
+}
+p, err := govalent.ClassA().GetLogEventsByContract("1", "0xc0da01a04c3f3e0be433606045bb7017a7323e38", params)
+if err != nil {
+    fmt.Printf("err = %v", err)
+    return
+}
+fmt.Printf("%v", p)
+```
+
 ### Class B endpoints
 
 TODO
