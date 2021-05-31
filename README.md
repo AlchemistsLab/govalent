@@ -1,6 +1,6 @@
 # Govalent
 
-govalent is a go client library for Covalent Rest APIs
+govalent is a go client for Covalent Rest APIs
 
 ## Installation
 
@@ -10,7 +10,7 @@ go get github.com/AlchemistsLab/govalent
 
 ### Usage without a Client
 
-If you are dealing with one account. There is no need to create a new client. you can simply call `govalent.$resource$()`
+If you are dealing with one account, there is no need to create a new client. you can simply call `govalent.$resource$()`
 
 ```go
 import (
@@ -20,7 +20,8 @@ import (
 
 // Setup
 govalent.APIKey = ""
-info, err := govalent.ClassA().HistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+info, err := govalent.ClassA().HistoricalPortfolio(
+	"56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -30,16 +31,17 @@ fmt.Printf("%v", info)
 
 ### Usage with a Client
 
-If you are dealing with multiple accounts. You can create a new `govalent.Client` by the following
+If you are dealing with multiple accounts, You can create a new `govalent.Client` by the following
 
 ```go
 import (
-    "fmt"
-    "github.com/AlchemistsLab/govalent"
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
 )
 client := govalent.Client{}
 client.Init("YOUR_API_KEY")
-info, err := client.ClassA.HistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+info, err := client.ClassA.HistoricalPortfolio(
+	"56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -66,7 +68,7 @@ func main() {
 	}
 	fmt.Println("Get All chains")
 	for _, chain := range chains.Items {
-		fmt.Printf("Chain[%+v/%v]\n", chain.ID, chain.Name)
+		fmt.Printf("Chain[%v/%v]\n", chain.ID, chain.Name)
 	}
 	fmt.Println("Get All chain statuses")
 	chainStatus, err := govalent.ClassA().ChainsStatus()
@@ -84,16 +86,17 @@ func main() {
 
 ```go
 import (
-    "fmt"
-    "github.com/AlchemistsLab/govalent"
-    "github.com/AlchemistsLab/govalent/class_a"
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
+	"github.com/AlchemistsLab/govalent/class_a"
 )
 
 balanceParams := class_a.BalanceParams{
 	Nft: true,
 }
 
-p, err := govalent.ClassA().TokenBalances("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", balanceParams)
+p, err := govalent.ClassA().TokenBalances(
+	"56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", balanceParams)
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -105,11 +108,12 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "fmt"
-    "github.com/AlchemistsLab/govalent"
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
 )
 
-p, err := govalent.ClassA().HistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+p, err := govalent.ClassA().HistoricalPortfolio(
+	"56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -121,11 +125,12 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "fmt"
-    "github.com/AlchemistsLab/govalent"
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
 )
 
-p, err := govalent.ClassA().Transactions("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+p, err := govalent.ClassA().Transactions(
+	"56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -137,18 +142,19 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "fmt"
-    "github.com/AlchemistsLab/govalent"
-    "github.com/AlchemistsLab/govalent/class_a"
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
+	"github.com/AlchemistsLab/govalent/class_a"
 )
 
 params := class_a.TransferParams{
     ContractAddress: "0x8a0C542bA7bBBab7cF3551fFcc546CdC5362d2a1",
 }
-p, err := govalent.ClassA().ERCTokenTransfers("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", params)
+p, err := govalent.ClassA().ERCTokenTransfers(
+	"56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", params)
 if err != nil {
-    fmt.Printf("err = %v", err)
-    return
+	fmt.Printf("err = %v", err)
+	return
 }
 fmt.Printf("%v", p)
 ```
@@ -157,19 +163,20 @@ fmt.Printf("%v", p)
 
 ```go
 import (
-    "fmt"
-    "github.com/AlchemistsLab/govalent"
-    "github.com/AlchemistsLab/govalent/class_a"
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
+	"github.com/AlchemistsLab/govalent/class_a"
 )
 
 params := class_a.LogEventsParams{
-    StartingBlock: "9601459",
-    EndingBlock: "9999800",
+	StartingBlock: "9601459",
+	EndingBlock: "9999800",
 }
-p, err := govalent.ClassA().LogEventsByContract("1", "0xc0da01a04c3f3e0be433606045bb7017a7323e38", params)
+p, err := govalent.ClassA().LogEventsByContract(
+	"1", "0xc0da01a04c3f3e0be433606045bb7017a7323e38", params)
 if err != nil {
-    fmt.Printf("err = %v", err)
-    return
+	fmt.Printf("err = %v", err)
+	return
 }
 fmt.Printf("%v", p)
 ```
@@ -190,7 +197,8 @@ func main() {
 	params := class_b.SushiSwapActsParams{
 		Swaps: true,
 	}
-	acts, err := govalent.ClassB().SushiSwapActs("137", "0x4121dD930B15742b6d2e89B41284A79320bb8503", params)
+	acts, err := govalent.ClassB().SushiSwapActs(
+		"137", "0x4121dD930B15742b6d2e89B41284A79320bb8503", params)
 	if err != nil {
 		fmt.Printf("err = %v", err)
 		return
