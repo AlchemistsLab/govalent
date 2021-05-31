@@ -56,7 +56,9 @@ func (a *API) Request(method, endpoint string, params interface{}, out interface
 		q := u.Query()
 		q.Set("key", a.Key)
 		for k, v := range m {
-			q.Set(k, fmt.Sprintf("%v", v))
+			if val := fmt.Sprintf("%v", v); v != "" {
+				q.Set(k, val)
+			}
 		}
 		u.RawQuery = q.Encode()
 		log.Printf("send request: %v %v", method, u.String())

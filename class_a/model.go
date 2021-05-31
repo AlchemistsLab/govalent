@@ -22,6 +22,9 @@ type LogEventsParams struct {
 	PageNumber    int    `json:"page-number"`
 }
 
+// TokenHoldersParams sets parameters for token holders endpoint.
+type TokenHoldersParams LogEventsParams
+
 // Pagination returns pagination metadata for each endpoint.
 type Pagination struct {
 	HasMore    bool `json:"has_more"`
@@ -54,7 +57,7 @@ type BlockResponse struct {
 	ErrorCode    int    `json:"error_code"`
 }
 
-// LogEventsResponse returns decoded log events.
+// LogEventsResponse returns decoded log events for logs endpoint.
 type LogEventsResponse struct {
 	Data         LogEvents `json:"data"`
 	Error        bool      `json:"error"`
@@ -68,6 +71,14 @@ type NFTTokenResponse struct {
 	Error        bool      `json:"error"`
 	ErrorMessage string    `json:"error_message"`
 	ErrorCode    int       `json:"error_code"`
+}
+
+// TokenHoldersResponse returns token holders data for token holders endpoint.
+type TokenHoldersResponse struct {
+	Data         TokenHolders `json:"data"`
+	Error        bool         `json:"error"`
+	ErrorMessage string       `json:"error_message"`
+	ErrorCode    int          `json:"error_code"`
 }
 
 // Portfolios returns list of items for portfolio endpoint.
@@ -114,6 +125,13 @@ type NFTTokens struct {
 	UpdatedAt  time.Time   `json:"updated_at"`
 	Items      []Portfolio `json:"items"`
 	Pagination Pagination  `json:"pagination"`
+}
+
+// TokenHolders returns list of token holder items.
+type TokenHolders struct {
+	UpdatedAt  time.Time     `json:"updated_at"`
+	Items      []TokenHolder `json:"items"`
+	Pagination Pagination    `json:"pagination"`
 }
 
 type Portfolio struct {
@@ -215,4 +233,13 @@ type NFTExternalData struct {
 		Value     interface{} `json:"value"`
 	} `json:"attributes"`
 	Owner string `json:"owner"`
+}
+
+type TokenHolder struct {
+	TokenHolder     string `json:"token_holder"`
+	PrevBalance     string `json:"prev_balance"`
+	PrevBlockHeight int    `json:"prev_block_height"`
+	NextBalance     string `json:"next_balance"`
+	NextBlockHeight int    `json:"next_block_height"`
+	Diff            string `json:"diff"`
 }

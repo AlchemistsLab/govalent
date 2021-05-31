@@ -22,6 +22,7 @@ type ClassAInterface interface {
 	GetExternalNFTMetadata(chainID, address, tokenID string) (NFTTokens, error)
 	GetNFTTokenIDs(chainID, address string) (NFTTokens, error)
 	GetNFTTransactions(chainID, address, tokenID string) (NFTTokens, error)
+	GetTokenHoldersChanges(chainID, address string, params TokenHoldersParams) (TokenHolders, error)
 }
 
 var _ ClassAInterface = (*Client)(nil)
@@ -106,5 +107,15 @@ func (c *Client) GetNFTTransactions(chainID, address, tokenID string) (NFTTokens
 	u := fmt.Sprintf("%v/tokens/%v/nft_transactions/%v/", chainID, address, tokenID)
 	response := NFTTokenResponse{}
 	err := c.API.Request("GET", u, nil, &response)
+	return response.Data, err
+}
+
+// GetTokenHoldersChanges gets token balance changes for token holders between starting-block and ending-block.
+// Returns a paginated list of token holders and their current/historical balances. If ending-block is omitted,
+// the latest block is used. Note: Token holder balances exclude passive rewards through static reflection.
+func (c *Client) GetTokenHoldersChanges(chainID, address string, params TokenHoldersParams) (TokenHolders, error) {
+	u := fmt.Sprintf("%v/tokens/%v/token_holders_changes/", chainID, address)
+	response := TokenHoldersResponse{}
+	err := c.API.Request("GET", u, params, &response)
 	return response.Data, err
 }
