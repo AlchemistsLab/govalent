@@ -49,11 +49,12 @@ func (a *API) Request(method, endpoint string, params interface{}, out interface
 		if err != nil {
 			return err
 		}
-		m := map[string]interface{}{"key": a.Key}
+		m := map[string]interface{}{}
 		if err := json.Unmarshal(b, &m); err != nil {
 			return err
 		}
 		q := u.Query()
+		q.Set("key", a.Key)
 		for k, v := range m {
 			q.Set(k, fmt.Sprintf("%v", v))
 		}
