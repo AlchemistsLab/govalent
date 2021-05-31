@@ -20,7 +20,7 @@ import (
 
 // Setup
 govalent.APIKey = ""
-info, err := govalent.ClassA().GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+info, err := govalent.ClassA().HistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -39,7 +39,7 @@ import (
 )
 client := govalent.Client{}
 client.Init("YOUR_API_KEY")
-info, err := client.ClassA.GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+info, err := client.ClassA.HistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -62,7 +62,7 @@ balanceParams := class_a.BalanceParams{
 	Nft: true,
 }
 
-p, err := govalent.ClassA().GetTokenBalances("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", balanceParams)
+p, err := govalent.ClassA().TokenBalances("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", balanceParams)
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -78,7 +78,7 @@ import (
     "github.com/AlchemistsLab/govalent"
 )
 
-p, err := govalent.ClassA().GetHistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+p, err := govalent.ClassA().HistoricalPortfolio("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -94,7 +94,7 @@ import (
     "github.com/AlchemistsLab/govalent"
 )
 
-p, err := govalent.ClassA().GetTransactions("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
+p, err := govalent.ClassA().Transactions("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B")
 if err != nil {
 	fmt.Printf("err = %v", err)
 	return
@@ -114,7 +114,7 @@ import (
 params := class_a.TransferParams{
     ContractAddress: "0x8a0C542bA7bBBab7cF3551fFcc546CdC5362d2a1",
 }
-p, err := govalent.ClassA().GetERCTokenTransfers("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", params)
+p, err := govalent.ClassA().ERCTokenTransfers("56", "0xb1b3f0e569a19E407cEb7bFAEA3486F0D9d2488B", params)
 if err != nil {
     fmt.Printf("err = %v", err)
     return
@@ -135,7 +135,7 @@ params := class_a.LogEventsParams{
     StartingBlock: "9601459",
     EndingBlock: "9999800",
 }
-p, err := govalent.ClassA().GetLogEventsByContract("1", "0xc0da01a04c3f3e0be433606045bb7017a7323e38", params)
+p, err := govalent.ClassA().LogEventsByContract("1", "0xc0da01a04c3f3e0be433606045bb7017a7323e38", params)
 if err != nil {
     fmt.Printf("err = %v", err)
     return
