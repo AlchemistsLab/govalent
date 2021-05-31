@@ -56,19 +56,28 @@ type BlockResponse struct {
 
 // LogEventsResponse returns decoded log events.
 type LogEventsResponse struct {
-	UpdatedAt    time.Time   `json:"updated_at"`
-	Data         LogEvents   `json:"data"`
-	Error        bool        `json:"error"`
-	ErrorMessage string      `json:"error_message"`
-	ErrorCode    interface{} `json:"error_code"`
+	UpdatedAt    time.Time `json:"updated_at"`
+	Data         LogEvents `json:"data"`
+	Error        bool      `json:"error"`
+	ErrorMessage string    `json:"error_message"`
+	ErrorCode    int       `json:"error_code"`
 }
 
-// NFTExternalMetadataResponse returns NFT external metadata for given address and token Id.
+// NFTExternalMetadataResponse returns NFT external metadata for nft external metadata endpoint.
 type NFTExternalMetadataResponse struct {
-	Data         NFTMetadata `json:"data"`
-	Error        bool        `json:"error"`
-	ErrorMessage string      `json:"error_message"`
-	ErrorCode    int         `json:"error_code"`
+	Data         NFTTokens `json:"data"`
+	Error        bool      `json:"error"`
+	ErrorMessage string    `json:"error_message"`
+	ErrorCode    int       `json:"error_code"`
+}
+
+// NFTTokenResponse returns NFT tokens data for given contract address.
+type NFTTokenResponse struct {
+	UpdatedAt    time.Time `json:"updated_at"`
+	Data         NFTTokens `json:"data"`
+	Error        bool      `json:"error"`
+	ErrorMessage string    `json:"error_message"`
+	ErrorCode    int       `json:"error_code"`
 }
 
 // Portfolios returns list of items for portfolio endpoint.
@@ -110,8 +119,8 @@ type LogEvents struct {
 	Pagination Pagination `json:"pagination"`
 }
 
-// NFTMetadata returns list of items for nft external metadata endpoint.
-type NFTMetadata struct {
+// NFTTokens returns list of token items.
+type NFTTokens struct {
 	Items      []Portfolio `json:"items"`
 	Pagination Pagination  `json:"pagination"`
 }
@@ -127,6 +136,7 @@ type Portfolio struct {
 	Balance              string     `json:"balance"`
 	QuoteRate            float64    `json:"quote_rate"`
 	Quote                float64    `json:"quote"`
+	TokenID              string     `json:"token_id"`
 	NftData              []NftData  `json:"nft_data"`
 	Holdings             []Holdings `json:"holdings"`
 }
