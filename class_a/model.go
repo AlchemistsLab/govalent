@@ -33,6 +33,13 @@ type Pagination struct {
 	TotalCount int  `json:"total_count"`
 }
 
+type ChainsResponse struct {
+	Data         Chains `json:"data"`
+	Error        bool   `json:"error"`
+	ErrorMessage string `json:"error_message"`
+	ErrorCode    int    `json:"error_code"`
+}
+
 // BalanceResponse returns portfolio data for token balances response.
 type BalanceResponse struct {
 	Data         Portfolios `json:"data"`
@@ -87,6 +94,39 @@ type TokenHoldersResponse struct {
 	Error        bool         `json:"error"`
 	ErrorMessage string       `json:"error_message"`
 	ErrorCode    int          `json:"error_code"`
+}
+
+// ContractsResponse returns token contracts data for token lists endpoint.
+type ContractsResponse struct {
+	Data         Contracts `json:"data"`
+	Error        bool      `json:"error"`
+	ErrorMessage string    `json:"error_message"`
+	ErrorCode    int       `json:"error_code"`
+}
+
+type Chains struct {
+	UpdatedAt time.Time `json:"updated_at"`
+	Items     []struct {
+		ChainID               string    `json:"chain_id"`
+		Name                  string    `json:"name"`
+		SyncedBlockHeight     int       `json:"synced_block_height"`
+		SyncedBlockedSignedAt time.Time `json:"synced_blocked_signed_at"`
+	} `json:"items"`
+	Pagination Pagination `json:"pagination"`
+}
+
+type Contracts struct {
+	UpdatedAt time.Time `json:"updated_at"`
+	Items     []struct {
+		ContractDecimals       int      `json:"contract_decimals"`
+		ContractName           string   `json:"contract_name"`
+		ContractTickerSymbol   string   `json:"contract_ticker_symbol"`
+		ContractAddress        string   `json:"contract_address"`
+		SupportsErc            []string `json:"supports_erc"`
+		LogoUrl                string   `json:"logo_url"`
+		EthereumMainnetAddress string   `json:"ethereum_mainnet_address"`
+	} `json:"items"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // Portfolios returns list of items for portfolio endpoint.

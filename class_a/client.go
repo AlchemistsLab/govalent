@@ -12,21 +12,50 @@ type Client struct {
 
 // ClassAInterface describes methods for Class A endpoints.
 type ClassAInterface interface {
+	Chains() (Chains, error)
+	ChainsStatus() (Chains, error)
+	TokenLists(chainID, id string) (Contracts, error)
+
 	TokenBalances(chainID, address string, params BalanceParams) (Portfolios, error)
 	HistoricalPortfolio(chainID, address string) (Portfolios, error)
+
 	Transactions(chainID, address string) (Transactions, error)
 	ERCTokenTransfers(chainID, address string, params TransferParams) (Transactions, error)
 	Block(chainID, blockHeight string) (Blocks, error)
 	LogEventsByContract(chainID, address string, params LogEventsParams) (LogEvents, error)
 	LogEventsByTopic(chainID, topic string, params LogEventsParams) (LogEvents, error)
+
 	ExternalNFTMetadata(chainID, address, tokenID string) (NFTTokens, error)
 	NFTTokenIDs(chainID, address string) (NFTTokens, error)
 	NFTTransactions(chainID, address, tokenID string) (NFTTokens, error)
+
 	TokenHoldersChanges(chainID, address string, params TokenHoldersParams) (TokenHoldersChanges, error)
 	TokenHolders(chainID, address string) (TokenHolders, error)
 }
 
 var _ ClassAInterface = (*Client)(nil)
+
+// Chains returns all chains.
+func (c *Client) Chains() (Chains, error) {
+	response := ChainsResponse{}
+	err := c.API.Request("GET", "chains/", nil, &response)
+	return response.Data, err
+}
+
+// ChainsStatus returns all chain statuses..
+func (c *Client) ChainsStatus() (Chains, error) {
+	response := ChainsResponse{}
+	err := c.API.Request("GET", "chains/status/", nil, &response)
+	return response.Data, err
+}
+
+// TokenLists returns a list of all contracts on a blockchain along with their metadata.
+func (c *Client) TokenLists(chainID, id string) (Contracts, error) {
+	u := fmt.Sprintf("%v/tokens/tokenlists/%v/", chainID, id)
+	response := ContractsResponse{}
+	err := c.API.Request("GET", u, nil, &response)
+	return response.Data, err
+}
 
 // TokenBalances returns a list of all ERC20 and NFT token balances along with their current spot prices.
 func (c *Client) TokenBalances(chainID, address string, params BalanceParams) (Portfolios, error) {
