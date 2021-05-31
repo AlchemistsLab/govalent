@@ -186,7 +186,7 @@ import (
 )
 
 func main() {
-	govalent.APIKey = "ckey_95c202a743e24270bc7f1706c4c"
+	govalent.APIKey = ""
 	params := class_b.SushiSwapActsParams{
 		Swaps: true,
 	}
