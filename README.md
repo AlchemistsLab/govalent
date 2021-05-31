@@ -49,6 +49,37 @@ fmt.Printf("%v", info)
 
 ### Class A endpoints
 
+#### Get Chains
+
+```go
+import (
+	"fmt"
+	"github.com/AlchemistsLab/govalent"
+)
+
+func main() {
+	govalent.APIKey = ""
+	chains, err := govalent.ClassA().Chains()
+	if err != nil {
+		fmt.Printf("err = %v", err)
+		return
+	}
+	fmt.Println("Get All chains")
+	for _, chain := range chains.Items {
+		fmt.Printf("Chain[%+v/%v]\n", chain.ID, chain.Name)
+	}
+	fmt.Println("Get All chain statuses")
+	chainStatus, err := govalent.ClassA().ChainsStatus()
+	if err != nil {
+		fmt.Printf("err = %v", err)
+		return
+	}
+	for _, chain := range chainStatus.Items {
+		fmt.Printf("Chain[%v/%v], BlockHeight: %v\n", chain.ID, chain.Name, chain.SyncedBlockHeight)
+	}
+}
+```
+
 #### Get Token Balances 
 
 ```go

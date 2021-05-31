@@ -107,7 +107,7 @@ type ContractsResponse struct {
 type Chains struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	Items     []struct {
-		ChainID               string    `json:"chain_id"`
+		ID                    string    `json:"chain_id"`
 		Name                  string    `json:"name"`
 		SyncedBlockHeight     int       `json:"synced_block_height"`
 		SyncedBlockedSignedAt time.Time `json:"synced_blocked_signed_at"`
