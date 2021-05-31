@@ -21,6 +21,7 @@ type ClassAInterface interface {
 	GetLogEventsByTopic(chainID, topic string, params LogEventsParams) (LogEvents, error)
 	GetExternalNFTMetadata(chainID, address, tokenID string) (NFTTokens, error)
 	GetNFTTokenIDs(chainID, address string) (NFTTokens, error)
+	GetNFTTransactions(chainID, address, tokenID string) (NFTTokens, error)
 }
 
 var _ ClassAInterface = (*Client)(nil)
@@ -95,6 +96,14 @@ func (c *Client) GetExternalNFTMetadata(chainID, address, tokenID string) (NFTTo
 // GetNFTTokenIDs returns a list of all token IDs for a NFT contract on a blockchain network.
 func (c *Client) GetNFTTokenIDs(chainID, address string) (NFTTokens, error) {
 	u := fmt.Sprintf("%v/tokens/%v/nft_token_ids/", chainID, address)
+	response := NFTTokenResponse{}
+	err := c.API.Request("GET", u, nil, &response)
+	return response.Data, err
+}
+
+// GetNFTTransactions returns a list of transactions given a NFT contract and a token ID on a blockchain network.
+func (c *Client) GetNFTTransactions(chainID, address, tokenID string) (NFTTokens, error) {
+	u := fmt.Sprintf("%v/tokens/%v/nft_transactions/%v/", chainID, address, tokenID)
 	response := NFTTokenResponse{}
 	err := c.API.Request("GET", u, nil, &response)
 	return response.Data, err

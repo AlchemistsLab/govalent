@@ -117,19 +117,20 @@ type NFTTokens struct {
 }
 
 type Portfolio struct {
-	ContractDecimals     int        `json:"contract_decimals"`
-	ContractName         string     `json:"contract_name"`
-	ContractTickerSymbol string     `json:"contract_ticker_symbol"`
-	ContractAddress      string     `json:"contract_address"`
-	SupportsErc          []string   `json:"supports_erc"`
-	LogoUrl              string     `json:"logo_url"`
-	Type                 string     `json:"type"`
-	Balance              string     `json:"balance"`
-	QuoteRate            float64    `json:"quote_rate"`
-	Quote                float64    `json:"quote"`
-	TokenID              string     `json:"token_id"`
-	NftData              []NftData  `json:"nft_data"`
-	Holdings             []Holdings `json:"holdings"`
+	ContractDecimals     int           `json:"contract_decimals"`
+	ContractName         string        `json:"contract_name"`
+	ContractTickerSymbol string        `json:"contract_ticker_symbol"`
+	ContractAddress      string        `json:"contract_address"`
+	SupportsErc          []string      `json:"supports_erc"`
+	LogoUrl              string        `json:"logo_url"`
+	Type                 string        `json:"type"`
+	Balance              string        `json:"balance"`
+	QuoteRate            float64       `json:"quote_rate"`
+	Quote                float64       `json:"quote"`
+	TokenID              string        `json:"token_id"`
+	NftData              []NftData     `json:"nft_data"`
+	NFTTransactions      []Transaction `json:"nft_transactions"`
+	Holdings             []Holdings    `json:"holdings"`
 }
 
 type Holdings struct {
