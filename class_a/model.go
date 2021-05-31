@@ -73,6 +73,14 @@ type NFTTokenResponse struct {
 	ErrorCode    int       `json:"error_code"`
 }
 
+// TokenHoldersChangesResponse returns token holders data for token holders changes endpoint.
+type TokenHoldersChangesResponse struct {
+	Data         TokenHoldersChanges `json:"data"`
+	Error        bool                `json:"error"`
+	ErrorMessage string              `json:"error_message"`
+	ErrorCode    int                 `json:"error_code"`
+}
+
 // TokenHoldersResponse returns token holders data for token holders endpoint.
 type TokenHoldersResponse struct {
 	Data         TokenHolders `json:"data"`
@@ -127,14 +135,22 @@ type NFTTokens struct {
 	Pagination Pagination  `json:"pagination"`
 }
 
-// TokenHolders returns list of token holder items.
+// TokenHoldersChanges returns list of token holder changes.
+type TokenHoldersChanges struct {
+	UpdatedAt  time.Time           `json:"updated_at"`
+	Items      []TokenHolderChange `json:"items"`
+	Pagination Pagination          `json:"pagination"`
+}
+
+// TokenHolders returns list of token holder changes.
 type TokenHolders struct {
-	UpdatedAt  time.Time     `json:"updated_at"`
-	Items      []TokenHolder `json:"items"`
-	Pagination Pagination    `json:"pagination"`
+	UpdatedAt  time.Time   `json:"updated_at"`
+	Items      []Portfolio `json:"items"`
+	Pagination Pagination  `json:"pagination"`
 }
 
 type Portfolio struct {
+	Address              string        `json:"address"`
 	ContractDecimals     int           `json:"contract_decimals"`
 	ContractName         string        `json:"contract_name"`
 	ContractTickerSymbol string        `json:"contract_ticker_symbol"`
@@ -146,6 +162,8 @@ type Portfolio struct {
 	QuoteRate            float64       `json:"quote_rate"`
 	Quote                float64       `json:"quote"`
 	TokenID              string        `json:"token_id"`
+	TotalSupply          string        `json:"total_supply"`
+	BlockHeight          int           `json:"block_height"`
 	NftData              []NftData     `json:"nft_data"`
 	NFTTransactions      []Transaction `json:"nft_transactions"`
 	Holdings             []Holdings    `json:"holdings"`
@@ -235,7 +253,7 @@ type NFTExternalData struct {
 	Owner string `json:"owner"`
 }
 
-type TokenHolder struct {
+type TokenHolderChange struct {
 	TokenHolder     string `json:"token_holder"`
 	PrevBalance     string `json:"prev_balance"`
 	PrevBlockHeight int    `json:"prev_block_height"`
