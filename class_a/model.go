@@ -2,17 +2,20 @@ package class_a
 
 import "time"
 
+// BalanceParams sets parameters for token balances endpoint.
 type BalanceParams struct {
 	Nft        bool `json:"nft"`
 	NoNftFetch bool `json:"no-nft-fetch"`
 }
 
+// TransferParams sets parameters for ERC20 token transfer endpoint.
 type TransferParams struct {
 	ContractAddress string `json:"contract-address"`
 	PageNumber      int    `json:"page-number"`
 	// PageSize        int    `json:"page-size"`
 }
 
+// Pagination returns pagination data for each endpoint.
 type Pagination struct {
 	HasMore    bool        `json:"has_more"`
 	PageNumber int         `json:"page_number"`
@@ -20,6 +23,7 @@ type Pagination struct {
 	TotalCount interface{} `json:"total_count"`
 }
 
+// Balance returns portfolio data for token balances response.
 type Balance struct {
 	Data         PortfolioData `json:"data"`
 	Error        bool          `json:"error"`
@@ -27,6 +31,7 @@ type Balance struct {
 	ErrorCode    interface{}   `json:"error_code"`
 }
 
+// PortfolioData returns list of items for portfolio endpoint.
 type PortfolioData struct {
 	Address       string          `json:"address"`
 	UpdatedAt     time.Time       `json:"updated_at"`
@@ -152,4 +157,20 @@ type TransactionItem struct {
 			} `json:"params"`
 		} `json:"decoded"`
 	} `json:"log_events"`
+}
+
+type Block struct {
+	Data         BlockData   `json:"data"`
+	Error        bool        `json:"error"`
+	ErrorMessage interface{} `json:"error_message"`
+	ErrorCode    interface{} `json:"error_code"`
+}
+
+type BlockData struct {
+	UpdatedAt time.Time `json:"updated_at"`
+	Items     []struct {
+		SignedAt time.Time `json:"signed_at"`
+		Height   int       `json:"height"`
+	} `json:"items"`
+	Pagination Pagination `json:"pagination"`
 }

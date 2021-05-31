@@ -16,6 +16,7 @@ type ClassAInterface interface {
 	GetHistoricalPortfolio(chainID, address string) (PortfolioData, error)
 	GetTransactions(chainID, address string) (TransactionData, error)
 	GetERCTokenTransfers(chainID, address string, params TransferParams) (TransactionData, error)
+	GetBlock(chainID, blockHeight string) (BlockData, error)
 }
 
 var _ ClassAInterface = (*Client)(nil)
@@ -52,4 +53,13 @@ func (c *Client) GetERCTokenTransfers(chainID, address string, params TransferPa
 	transaction := Transaction{}
 	err := c.API.Request("GET", u, params, &transaction)
 	return transaction.Data, err
+}
+
+// GetBlock retrieves a single block at block_height.
+// If block_height is set to the value latest, return the latest block available.
+func (c *Client) GetBlock(chainID, blockHeight string) (BlockData, error) {
+	u := fmt.Sprintf("%v/block_v2/%v/", chainID, blockHeight)
+	block := Block{}
+	err := c.API.Request("GET", u, nil, &block)
+	return block.Data, err
 }
