@@ -24,10 +24,10 @@ type LogEventsParams struct {
 
 // Pagination returns pagination data for each endpoint.
 type Pagination struct {
-	HasMore    bool        `json:"has_more"`
-	PageNumber int         `json:"page_number"`
-	PageSize   int         `json:"page_size"`
-	TotalCount interface{} `json:"total_count"`
+	HasMore    bool `json:"has_more"`
+	PageNumber int  `json:"page_number"`
+	PageSize   int  `json:"page_size"`
+	TotalCount int  `json:"total_count"`
 }
 
 // Balance returns portfolio data for token balances response.
@@ -35,7 +35,36 @@ type Balance struct {
 	Data         PortfolioData `json:"data"`
 	Error        bool          `json:"error"`
 	ErrorMessage string        `json:"error_message"`
-	ErrorCode    interface{}   `json:"error_code"`
+	ErrorCode    int           `json:"error_code"`
+}
+
+// Transaction returns transaction data.
+type Transaction struct {
+	Data         TransactionData `json:"data"`
+	Error        bool            `json:"error"`
+	ErrorMessage string          `json:"error_message"`
+	ErrorCode    int             `json:"error_code"`
+}
+
+// Block returns block data for given contract address.
+type Block struct {
+	Data         BlockData `json:"data"`
+	Error        bool      `json:"error"`
+	ErrorMessage string    `json:"error_message"`
+	ErrorCode    int       `json:"error_code"`
+}
+
+// NFTExternalMetadata returns.
+type NFTExternalMetadata struct {
+	Data         NFTExternalData `json:"data"`
+	Error        bool            `json:"error"`
+	ErrorMessage string          `json:"error_message"`
+	ErrorCode    int             `json:"error_code"`
+}
+
+type NFTExternalData struct {
+	Items      []PortfolioItem `json:"items"`
+	Pagination Pagination      `json:"pagination"`
 }
 
 // PortfolioData returns list of items for portfolio endpoint.
@@ -108,13 +137,6 @@ type ExternalData struct {
 	Owner string `json:"owner"`
 }
 
-type Transaction struct {
-	Data         TransactionData `json:"data"`
-	Error        bool            `json:"error"`
-	ErrorMessage string          `json:"error_message"`
-	ErrorCode    interface{}     `json:"error_code"`
-}
-
 type TransactionData struct {
 	Address       string            `json:"address"`
 	UpdatedAt     time.Time         `json:"updated_at"`
@@ -142,13 +164,6 @@ type TransactionItem struct {
 	GasQuote         float64     `json:"gas_quote"`
 	GasQuoteRate     float64     `json:"gas_quote_rate"`
 	LogEvents        []LogEvent  `json:"log_events"`
-}
-
-type Block struct {
-	Data         BlockData   `json:"data"`
-	Error        bool        `json:"error"`
-	ErrorMessage string      `json:"error_message"`
-	ErrorCode    interface{} `json:"error_code"`
 }
 
 type BlockData struct {

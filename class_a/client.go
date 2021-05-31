@@ -19,6 +19,7 @@ type ClassAInterface interface {
 	GetBlock(chainID, blockHeight string) (BlockData, error)
 	GetLogEventsByContract(chainID, address string, params LogEventsParams) (LogEventsData, error)
 	GetLogEventsByTopic(chainID, topic string, params LogEventsParams) (LogEventsData, error)
+	GetExternalNFTMetadata(chainID, address, tokenID string) (NFTExternalData, error)
 }
 
 var _ ClassAInterface = (*Client)(nil)
@@ -74,10 +75,18 @@ func (c *Client) GetLogEventsByContract(chainID, address string, params LogEvent
 	return logEvents.Data, err
 }
 
-// GetLogEventsByTopic returns a paginated list of decoded log events with one or more topic hashes separated by a comma..
+// GetLogEventsByTopic returns a paginated list of decoded log events with one or more topic hashes separated by a comma.
 func (c *Client) GetLogEventsByTopic(chainID, topic string, params LogEventsParams) (LogEventsData, error) {
 	u := fmt.Sprintf("%v/events/topics/%v/", chainID, topic)
 	logEvents := LogEvents{}
 	err := c.API.Request("GET", u, params, &logEvents)
 	return logEvents.Data, err
+}
+
+// GetExternalNFTMetadata returns the external metadata for given a NFT contract address and a token ID.
+func (c *Client) GetExternalNFTMetadata(chainID, address, tokenID string) (NFTExternalData, error) {
+	u := fmt.Sprintf("%v/tokens/%v/nft_metadata/%v/", chainID, address, tokenID)
+	nftMetadata := NFTExternalMetadata{}
+	err := c.API.Request("GET", u, nil, &nftMetadata)
+	return nftMetadata.Data, err
 }
